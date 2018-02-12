@@ -1,5 +1,7 @@
-__author__ = 'rohanrajagopalan'
 #!/usr/bin/env python
+#
+# Last Change: Sun Feb 04, 2018 at 09:04 PM -0500
+# Author: Rohan Rajagopalan
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 import time
@@ -9,15 +11,8 @@ import unicodedata
 try:
     from ADCPi import ADCPi
 except ImportError:
-    print("Failed to import ADCPi from python system path")
-    print("Importing from parent folder instead")
-    try:
-        import sys
-        sys.path.append('..')
-        from ADCPi import ADCPi
-    except ImportError:
-        raise ImportError(
-            "Failed to import library from parent folder")
+    from bUrnIn.ADC.ADCPi import ADCPi
+
 
 def main():
     '''

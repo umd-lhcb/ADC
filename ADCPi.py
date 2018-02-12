@@ -1,9 +1,12 @@
 #!/usr/bin/env python
+#
+# Last Change: Sun Feb 04, 2018 at 08:55 PM -0500
 
 try:
     import smbus
 except ImportError:
     raise ImportError("python-smbus not found")
+
 import re
 import platform
 

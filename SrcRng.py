@@ -5,7 +5,7 @@
 try:
     from base import DataSource
 except ImportError:
-    from bUrn.ADC.base import DataSource
+    from bUrnIn.ADC.base import DataSource
 
 from random import uniform
 

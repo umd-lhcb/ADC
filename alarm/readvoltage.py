@@ -9,7 +9,9 @@ class AlarmSetup(object):
     def __init__(self, ch):
         self.ch = ch
 
+        # Use the Board numbering
         GPIO.setmode(GPIO.BOARD)
+
         # To quote from:
         # https://www.raspberrypi.org/forums/viewtopic.php?t=87292
         #   The pull-up/downs supply some voltage so that the GPIO will have a
@@ -18,7 +20,9 @@ class AlarmSetup(object):
         #   to pull it up to 1.
         #   You should set a pull-up (to 1) when you expect the stronger force
         #   to pull it down to 0.
-        GPIO.setup(self.ch, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        #   Maybe we don't need this parameter after all.
+        #GPIO.setup(self.ch, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.ch, GPIO.IN)
 
     def cleanup(self):
         GPIO.cleanup()

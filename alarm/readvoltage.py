@@ -6,27 +6,28 @@ import RPi.GPIO as GPIO
 
 
 class AlarmSetup(object):
-    ch1 = 14
-
-    def __init__(self):
+    def __init__(self, ch):
+        self.ch = ch
         GPIO.setmode(GPIO.BOARD)
-        GPIO.setup(self.ch1, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.ch, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     def cleanup(self):
         GPIO.cleanup()
 
-    def read_channels(self):
-        return GPIO.input(self.ch1)
+    def read_channel(self):
+        return GPIO.input(self.ch)
 
 
 if __name__ == '__main__':
     from time import sleep
 
-    alarm = AlarmSetup()
+    alarm = AlarmSetup(ch=29)
 
     while True:
         try:
-            print(alarm.read_channels())
-            sleep(0.01)
+            if alarm.read_channel() == 1:
+                print('Fire!')
         except KeyboardInterrupt:
             break
+
+    alarm.cleanup()

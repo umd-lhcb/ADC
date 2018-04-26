@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Last Change: Thu Apr 26, 2018 at 02:06 PM -0400
+# Last Change: Thu Apr 26, 2018 at 02:08 PM -0400
 
 import RPi.GPIO as GPIO
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
     while True:
         try:
-            if alarm.read_channel() == 1:
+            if alarm.read_channel() == 0:
                 print('Fire!')
         except KeyboardInterrupt:
             break

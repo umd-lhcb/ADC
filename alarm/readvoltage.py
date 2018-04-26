@@ -28,7 +28,7 @@ class AlarmSetup(object):
 
 
 if __name__ == '__main__':
-    import sys.argv
+    import sys
 
     alarm = AlarmSetup(ch=int(sys.argv[1]))
 

@@ -1,0 +1,1 @@
+This directory was created by Jorge Ramirez specifically for the code to be used to monitor and record the temperatures from the thermal sensors using a raspberry pi.

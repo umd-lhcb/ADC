@@ -1,6 +1,6 @@
 # !/usr/bin/env python
 # Author: Jorge Ramirez
-# Last Change: Thu Jul 19, 2018 at 12:07 PM -0400
+# Last Change: Thu Jul 19, 2018 at 15:07 PM -0400
 
 import threading
 import time
@@ -26,7 +26,6 @@ class ThermThread(threading.Thread):
     each thermThread initializes w/ "thread_id" which will be an integer used
     as identifier "name" which will be therm serial.
     '''
-
      # initialize thread with standard arguments
     def __init__(self,
         thread_id, sensor, *args,
@@ -58,7 +57,7 @@ class ThermThread(threading.Thread):
         return temp_string
 
      # simple convert method. It will probably be removed. perhaps it will be
-     # more beneficial to return the raw temp_string to the server
+     # more beneficial to return the raw temp_string to the server process
     def convert_therm(self, sensor_num):
         fahrenheit = (float(sensor_num) / 1000.0 * 9 / 5.0) + 32.0
         return fahrenheit
@@ -67,9 +66,8 @@ class ThermThread(threading.Thread):
     def print_therm(self, sensor, data, thread_id):
         print(("Sensor {} ({}) detects {}".format(thread_id, sensor, data)))
 
-     # by default, each thread will
-     # announce -> extract -> convert -> print
 
+     # thread task: announce -> loop(extract -> convert -> print)
     def run(self):
         self.announce()  # announce
         while True:
@@ -77,8 +75,8 @@ class ThermThread(threading.Thread):
             final = self.convert_therm(data)  # convert
             self.print_therm(self, self.sensor, final, self.thread_id)  # print
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
      # create new threads
     for i in range(len(sensor_dir)):
         thread_dir[i] = ThermThread(i, sensor_dir[i])  # (thread_id, sensor)

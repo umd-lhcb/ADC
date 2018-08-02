@@ -18,19 +18,21 @@ GPIO.setup(InputBCM, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # activate pin
 
 
 def sound_the_alarm(channel):
-    time.sleep(0.5)
     if GPIO.input(channel) == GPIO.HIGH:
         print('Leak! Leak!')
-
+        time.sleep(0.01)
 
  # main leak detection
+
+GPIO.add_event_detect(InputBCM, GPIO.BOTH, callback=sound_the_alarm,
+    bouncetime=100)
+
+ # add_event_detect runs as a separate thread that waits for the pin to
+ # change states, and when it does, it executes sound_the_alarm
+
 try:
-    GPIO.add_event_detect(InputBCM, GPIO.BOTH, callback=sound_the_alarm)
-
-     # add_event_detect runs as a separate thread that waits for the pin to
-     # change states, and when it does, it executes sound_the_alarm
-
-    message = input('\nPress Any Key to Exit.\n')
+     # keep script open with a way to exit
+    message = input('\nEnter Any Key to Exit.\n')
 
 finally:
     GPIO.cleanup()

@@ -1,31 +1,32 @@
 from pathlib import Path
 
+sensorfolders = []  # save sensor folders in here
 
 def detect_sensors():
      # Detect how many sensors there are
     sensor_dir = "/sys/bus/w1/devices/"  # expected location of sensors
     scandir = Path(sensor_dir)  # set directory to be scanned
-    sensorfolders = []  # save sensor folders in here
 
     for item in scandir.iterdir():
         if item.is_dir() and str(item.stem)[:8] == '28-00000':
             sensorfolders.append(item)
+            print('appended')
 
     return sensorfolders
 
+
 def give_sensor_path(index):
-    #print(detect_sensors()[index])
-    return detect_sensors()[index]
+    return sensorfolders[index]
+
 
 def give_sensor_serial(index):
-    print(str(detect_sensors()[index].stem)[8:])
+    return str(detect_sensors()[index].stem)[8:]
 
 
 def list_all_sensors():
-    for item in range(len(detect_sensors())):
-        print(give_sensor_serial(item))
+    for x in range(len(detect_sensors())):
+        print((give_sensor_serial(x)))
 
-give_sensor_path(2)
-give_sensor_serial(2)
-print()
-list_all_sensors()
+detect_sensors()
+print(sensorfolders[1])
+print(give_sensor_path(4))

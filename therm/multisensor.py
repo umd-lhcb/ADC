@@ -24,7 +24,8 @@ def get_total_sensor_num(path):
 class ThermThread(threading.Thread):
     '''
     each thermThread initializes w/ "thread_id" which will be an integer used
-    as identifier "name" which will be therm serial.
+    as identifier "n
+    ame" which will be therm serial.
     '''
      # initialize thread with standard arguments
     def __init__(self,

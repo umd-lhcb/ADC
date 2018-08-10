@@ -77,6 +77,7 @@ class ThermThread(threading.Thread):
             self.print_therm(self, self.sensor, final, self.thread_id)  # print
 
 
+
 if __name__ == '__main__':
      # create new threads
     for i in range(len(sensor_dir)):

@@ -50,7 +50,7 @@ an internal pulldown resistor. it will probe every 0.1 seconds, and if it
 detects a leak, then the 'leakcounter' variable wil lincrease by one.
 
 it seems as if 1 hit to leakcounter can be safely ignored, even tiny drops
-that run across the sensor trigger the sensor at least once.
+that run across the sensor trigger the sensor at least twice.
 
 anything more than 5 hits is a major leak (the sensor is in a puddle of water)
 

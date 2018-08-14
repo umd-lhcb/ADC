@@ -12,3 +12,8 @@ related actvitities.
     Written by Jorge Ramirez, improvements from Yipeng Sun.
 * `moist`: leaksensor.py is a script that uses the LS2600 leak sensor in order to monitor for leaks. If the LS2600 has both contacts in water, then the script will record this and track for how long in the variable 'leak counter'. Otherwise, the script does nothing. more info at the bottom of the .py file. 
     Written by Jorge Ramirez, improvements from Yipeng Sun.
+
+
+## Documentation
+
+tba

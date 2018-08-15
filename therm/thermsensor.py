@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 01:19 PM -0400
+# Last Change: Wed Aug 15, 2018 at 01:23 PM -0400
 
 import logging
 import time
@@ -33,8 +33,6 @@ class ThermalSensor(Thread):
                 time.sleep(self.interval)
             except KeyboardInterrupt:
                 break
-
-        self.cleanup()
 
     def get(self):
         with self.sensor.open() as f:
@@ -101,3 +99,7 @@ if __name__ == '__main__':
     # start new threads once all have been initialized
     for sensor in sensor_list:
         sensor.start()
+
+    # cleanup in the end
+    for sensor in sensor_list:
+        sensor.cleanup()

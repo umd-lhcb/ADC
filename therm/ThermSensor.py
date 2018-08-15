@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 05:44 PM -0400
+# Last Change: Wed Aug 15, 2018 at 06:12 PM -0400
 
 import logging
 import sys
@@ -98,12 +98,13 @@ if __name__ == '__main__':
     for sensor in sensor_list:
         sensor.start()
 
-    while True:
-        try:
+    try:
+        while True:
             pass
-        except KeyboardInterrupt:
-            stop_event.set()
+    except KeyboardInterrupt:
+        print("Preparing for graceful shutdown...")
 
     # cleanup in the end
+    stop_event.set()
     for sensor in sensor_list:
         sensor.cleanup()

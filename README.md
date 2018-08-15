@@ -3,7 +3,7 @@ This library provides an interface from the Rasperberry Pi GPIO to burn-in
 related actvitities.
 
 ## `therm`
-`multisensor.py` is a script that reads the output files made by the ds18b20
+`multisensor.py` is a script that reads the output files made by the DS18B20
 thermometers and runs a multithreaded process with each thread dedicated to
 reading and outputting the data values from one thermometer. **To set a delay
 on recording, run script in terminal with an integer to specify the delay in

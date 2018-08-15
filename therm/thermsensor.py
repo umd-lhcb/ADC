@@ -1,7 +1,7 @@
 # !/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 01:02 PM -0400
+# Last Change: Wed Aug 15, 2018 at 01:13 PM -0400
 
 import logging
 import time
@@ -72,7 +72,7 @@ def detect_sensors(sensor_dir="/sys/bus/w1/devices",
     print('Detecting sensors and adding to list...')
     for item in scan_dir.iterdir():
         if item.is_dir() and item.stem[:8] == sensor_name_prefix:
-            sensor = item + Path(sensor_file_name)
+            sensor = item / Path(sensor_file_name)
             sensor_list.append(sensor)
             print('sensor {} appended.'.format(sensor.stem))
 

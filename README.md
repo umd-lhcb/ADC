@@ -15,7 +15,7 @@ will have a 4 second delay between each round of recording.
 
 Written by Jorge Ramirez, improvements by Yipeng Sun.
 
-### Pi configuration
+### Setup
 In `/boot/config.txt`, add the following line:
 ```
 dtoverlay=w1-gpio,pullup=1

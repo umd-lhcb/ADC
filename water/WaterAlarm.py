@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez Ortiz, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 06:05 PM -0400
+# Last Change: Wed Aug 15, 2018 at 06:09 PM -0400
 
 
 import RPi.GPIO as GPIO
 import sys
 
 from threading import Thread, Event
-from time import sleep
 
 
 class WaterAlarm(Thread):
@@ -64,14 +63,15 @@ class WaterAlarm(Thread):
 if __name__ == '__main__':  # ensure that script is being run from terminal
     stop_event = Event()
 
-    print("Initializing water leak detector...")
+    print('Initializing water leak detector...')
     alarm = WaterAlarm(stop_event, ch=int(sys.argv[1]))
     alarm.start()
 
-    while True:
-        try:
-            sleep(0.1)
-        except KeyboardInterrupt:
-            stop_event.set()
+    try:
+        while True:
+            pass
+    except KeyboardInterrupt:
+        print('Preparing for graceful shutdown...')
 
+    stop_event.set()
     alarm.cleanup()

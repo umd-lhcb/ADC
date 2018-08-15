@@ -1,7 +1,7 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 01:15 PM -0400
+# Last Change: Wed Aug 15, 2018 at 01:19 PM -0400
 
 import logging
 import time

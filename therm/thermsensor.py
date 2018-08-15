@@ -1,26 +1,31 @@
 # !/usr/bin/env python
-# Author: Jorge Ramirez
-# Last Change: Fri Aug 10, 2018 at 9:07 AM -0400
+#
+# Authors: Jorge Ramirez, Yipeng Sun
+# Last Change: Wed Aug 15, 2018 at 10:30 AM -0400
 
-from pathlib import Path
 import threading
 import time
 import sys
 
-sensorfolders = []  # save sensor folders in here
+from pathlib import Path
 
 
-def detect_sensors():
-     # Detect how many sensors there are
-    sensor_dir = "/sys/bus/w1/devices/"  # expected location of sensors
-    scandir = Path(sensor_dir)  # set directory to be scanned
+###########
+# Helpers #
+###########
 
-    print('\nDetecting sensors and adding to list...')
-    for item in scandir.iterdir():
-        if item.is_dir() and str(item.stem)[:8] == '28-00000':
-            sensorfolders.append(item)
-            print(('sensor ' + str(item.stem)[8:] + ' appended.'))
-    return sensorfolders
+def detect_sensors(sensor_dir="/sys/bus/w1/devices",
+                   sensor_name_prefix='28-00000'):
+    scan_dir = Path(sensor_dir)  # set directory to be scanned
+    sensor_list = []
+
+    print('Detecting sensors and adding to list...')
+    for item in scan_dir.iterdir():
+        if item.is_dir() and item.stem[:8] == sensor_name_prefix:
+            sensor_list.append(item)
+            print('sensor {} appended.'.format(item.stem))
+
+    return sensor_list
 
 
 def give_sensor_path(index):

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 05:04 PM -0400
+# Last Change: Wed Aug 15, 2018 at 05:44 PM -0400
 
 import logging
 import sys
@@ -13,9 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class ThermSensor(Thread):
-    def __init__(self,
-                 stop_event,
-                 *args,
+    def __init__(self, stop_event, *args,
                  sensor=None, display_name=None, interval=5,
                  **kwargs):
         self.stop_event = stop_event
@@ -105,6 +103,7 @@ if __name__ == '__main__':
             pass
         except KeyboardInterrupt:
             stop_event.set()
-            # cleanup in the end
-            for sensor in sensor_list:
-                sensor.cleanup()
+
+    # cleanup in the end
+    for sensor in sensor_list:
+        sensor.cleanup()

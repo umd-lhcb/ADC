@@ -1,7 +1,7 @@
 # !/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 01:13 PM -0400
+# Last Change: Wed Aug 15, 2018 at 01:15 PM -0400
 
 import logging
 import time
@@ -50,7 +50,7 @@ class ThermalSensor(Thread):
 
     def announce(self):
         logger.info("Starting: read from {}, with a display name of {}".format(
-            self.sensor_path, self.display_name
+            self.sensor.stem, self.display_name
         ))
 
     @staticmethod

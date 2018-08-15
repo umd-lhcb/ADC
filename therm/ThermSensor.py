@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 06:12 PM -0400
+# Last Change: Wed Aug 15, 2018 at 06:19 PM -0400
 
 import logging
 import sys
@@ -68,7 +68,7 @@ def detect_sensors(sensor_dir="/sys/bus/w1/devices",
         if item.is_dir() and item.stem[:8] == sensor_name_prefix:
             sensor = item / Path(sensor_file_name)
             sensor_list.append(sensor)
-            print('sensor {} appended.'.format(sensor.stem))
+            print('sensor {} appended.'.format(item.stem))
 
     return sensor_list
 

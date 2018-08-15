@@ -1,9 +1,10 @@
-# Code for firealarm leak sensor
-# Written by Jorge Ramirez Ortiz
-# Last edit: Tue Aug 07, 2018 at 9:01 AM -0400
+#!/usr/bin/env python
+#
+# Authors: Jorge Ramirez Ortiz, Yipeng Sun
+# Last Change: Wed Aug 15, 2018 at 03:37 PM -0400
 
- # nominal: no water means circuit is open & BCM 17 is LOW due to PULLDOWN
- # water detected: leak sensor closes, becomes 2Mohm resistor & BCM 17 is HIGH
+# nominal: no water means circuit is open & BCM 17 is LOW due to PULLDOWN
+# water detected: leak sensor closes, becomes 2Mohm resistor & BCM 17 is HIGH
 
 import RPi.GPIO as GPIO
 import time
@@ -11,6 +12,20 @@ import sys
 
 
 class WaterAlarm(object):
+    '''
+    alarm.leakcounter variable can be used to guard against false alarms.
+
+    This script will monitor the input pin for a HIGH. it is default LOW due to
+    an internal pulldown resistor. it will probe every 0.1 seconds, and if it
+    detects a leak, then the 'leakcounter' variable wil lincrease by one.
+
+    It seems as if 1 hit to leakcounter can be safely ignored, even tiny drops
+    that run across the sensor trigger the sensor at least twice.
+
+    Anything more than 5 hits is a major leak (the sensor is in a puddle of
+    water)
+
+    '''
     def __init__(self, ch):
         self.ch = ch
         self.leakcounter = 0  # counter to see how long leak lasted
@@ -40,18 +55,3 @@ if __name__ == '__main__':  # ensure that script is being run from termianl
         except KeyboardInterrupt:
             alarm.cleanup()
             break
-
-'''
-
-alarm.leakcounter variable can be used to guard against false alarms.
-
-this script will monitor the input pin for a HIGH. it is default LOW due to
-an internal pulldown resistor. it will probe every 0.1 seconds, and if it
-detects a leak, then the 'leakcounter' variable wil lincrease by one.
-
-it seems as if 1 hit to leakcounter can be safely ignored, even tiny drops
-that run across the sensor trigger the sensor at least twice.
-
-anything more than 5 hits is a major leak (the sensor is in a puddle of water)
-
-'''

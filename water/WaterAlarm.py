@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez Ortiz, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 06:02 PM -0400
+# Last Change: Wed Aug 15, 2018 at 06:05 PM -0400
 
 
 import RPi.GPIO as GPIO
 import sys
 
 from threading import Thread, Event
+from time import sleep
 
 
 class WaterAlarm(Thread):
@@ -69,7 +70,7 @@ if __name__ == '__main__':  # ensure that script is being run from terminal
 
     while True:
         try:
-            pass
+            sleep(0.1)
         except KeyboardInterrupt:
             stop_event.set()
 

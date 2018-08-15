@@ -1,22 +1,24 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 03:50 PM -0400
+# Last Change: Wed Aug 15, 2018 at 05:04 PM -0400
 
 import logging
-import time
 import sys
 
 from pathlib import Path
-from threading import Thread
+from threading import Thread, Event
 
 logger = logging.getLogger(__name__)
 
 
 class ThermSensor(Thread):
-    def __init__(self, *args,
+    def __init__(self,
+                 stop_event,
+                 *args,
                  sensor=None, display_name=None, interval=5,
                  **kwargs):
+        self.stop_event = stop_event
         self.sensor = sensor
         self.display_name = display_name
         self.interval = interval
@@ -26,13 +28,9 @@ class ThermSensor(Thread):
     def run(self):
         self.announce()
 
-        while True:
-            try:
-                data = str(self.get())
-                self.print_therm(self.sensor.stem, self.display_name, data)
-                time.sleep(self.interval)
-            except KeyboardInterrupt:
-                break
+        while not self.stop_event.wait(self.interval):
+            data = str(self.get())
+            self.print_therm(self.sensor.stem, self.display_name, data)
 
     def get(self):
         with self.sensor.open() as f:
@@ -88,11 +86,13 @@ if __name__ == '__main__':
     # detect sensors and assign threads
     sensor_path = detect_sensors()
     sensor_list = []
+    stop_event = Event()
 
     # create new threads
     for i in range(len(sensor_path)):
         sensor_list.append(
-            ThermSensor(sensor=sensor_path[i], display_name=str(i),
+            ThermSensor(stop_event,
+                        sensor=sensor_path[i], display_name=str(i),
                         interval=int(sys.argv[1])
                         ))
 
@@ -100,6 +100,11 @@ if __name__ == '__main__':
     for sensor in sensor_list:
         sensor.start()
 
-    # cleanup in the end
-    for sensor in sensor_list:
-        sensor.cleanup()
+    while True:
+        try:
+            pass
+        except KeyboardInterrupt:
+            stop_event.set()
+            # cleanup in the end
+            for sensor in sensor_list:
+                sensor.cleanup()

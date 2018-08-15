@@ -7,8 +7,11 @@ related actvitities.
 thermometers and runs a multithreaded process with each thread dedicated to
 reading and outputting the data values from one thermometer. **To set a delay
 on recording, run script in terminal with an integer to specify the delay in
-seconds.** e.g "python3 thermsensor.py 4" will have a 4 second delay between
-each round of recording.
+seconds:**
+```
+python thermsensor.py 4
+```
+will have a 4 second delay between each round of recording.
 
 Written by Jorge Ramirez, improvements by Yipeng Sun.
 

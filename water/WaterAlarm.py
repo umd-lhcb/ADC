@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez Ortiz, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 05:54 PM -0400
+# Last Change: Wed Aug 15, 2018 at 05:56 PM -0400
 
 
 import RPi.GPIO as GPIO
@@ -13,6 +13,7 @@ from threading import Thread, Event
 class WaterAlarm(Thread):
     def __init__(self, stop_event, *args,
                  ch=9, interval=0.01, alarm_threshhold=2, **kwargs):
+        self.stop_event = stop_event
         self.ch = ch
         self.interval = interval
 

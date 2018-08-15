@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez Ortiz, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 05:56 PM -0400
+# Last Change: Wed Aug 15, 2018 at 06:00 PM -0400
 
 
 import RPi.GPIO as GPIO
@@ -31,11 +31,12 @@ class WaterAlarm(Thread):
         # of water)
         self.leak_counter = 0
 
+        GPIO.setmode(GPIO.BOARD)
+
         # nominal: no water means circuit is open & BCM 17 is LOW due to
         #          PULLDOWN
-        # water detected: leak sensor closes, becomes 2Mohm resistor & BCM 17 is
-        #                 HIGH
-        GPIO.setmode(GPIO.BCM)
+        # water detected: leak sensor closes, becomes 2M ohm resistor & BCM 17
+        #                 is HIGH
         GPIO.setup(self.ch, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # activate pin
 
         super().__init__(*args, **kwargs)

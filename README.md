@@ -15,6 +15,12 @@ will have a 4 second delay between each round of recording.
 
 Written by Jorge Ramirez, improvements by Yipeng Sun.
 
+### Pi configuration
+In `/boot/config.txt`, add the following line:
+```
+dtoverlay=w1-gpio,pullup=1
+```
+
 ## `moist`
 `leaksensor.py` is a script that uses the LS2600 leak sensor in order to monitor
 for leaks. If the LS2600 has both contacts in water, the sensor will close the

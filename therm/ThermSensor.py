@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # Authors: Jorge Ramirez, Yipeng Sun
-# Last Change: Wed Aug 15, 2018 at 01:23 PM -0400
+# Last Change: Wed Aug 15, 2018 at 03:50 PM -0400
 
 import logging
 import time
@@ -13,7 +13,7 @@ from threading import Thread
 logger = logging.getLogger(__name__)
 
 
-class ThermalSensor(Thread):
+class ThermSensor(Thread):
     def __init__(self, *args,
                  sensor=None, display_name=None, interval=5,
                  **kwargs):
@@ -92,9 +92,9 @@ if __name__ == '__main__':
     # create new threads
     for i in range(len(sensor_path)):
         sensor_list.append(
-            ThermalSensor(sensor=sensor_path[i], display_name=str(i),
-                          interval=int(sys.argv[1])
-                          ))
+            ThermSensor(sensor=sensor_path[i], display_name=str(i),
+                        interval=int(sys.argv[1])
+                        ))
 
     # start new threads once all have been initialized
     for sensor in sensor_list:

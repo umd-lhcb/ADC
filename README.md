@@ -10,7 +10,7 @@ reading and outputting the data values from one thermometer. **To set a delay
 on recording, run script in terminal with an integer to specify the delay in
 seconds:**
 ```
-python thermsensor.py 4
+python ThermSensor.py 4
 ```
 will have a 4 second delay between each round of recording.
 
